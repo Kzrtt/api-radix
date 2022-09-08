@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Items;
+use App\Models\Item;
 use App\Models\Pedido;
 
 class ItemController extends Controller
@@ -53,7 +53,7 @@ class ItemController extends Controller
     {
         if(Pedido::where('idPedido', $idPedido)->exists())
         {
-            $items = Items::all();
+            $items = Item::all();
             $filtered = $items->filter(function($value, $key) use ($idPedido) {
                 return $value->idPedido == $idPedido;
             });

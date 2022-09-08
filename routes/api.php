@@ -103,7 +103,7 @@ Route::delete('/deleteItem/{idItem}', [ItemController::class, 'deleteItem']);
  */
 Route::post('/inserirPedido', [PedidoController::class, 'inserirPedido']);
 Route::get('/getPedido/{id}', [PedidoController::class, 'getPedido']);
-Route::get('/getAllPedidos', [PedidoController::class, 'getAllPedidos']);
+Route::get('/getAllPedidos/{id}', [PedidoController::class, 'getAllPedidos']);
 
 //Métodos Conversa
 /**
@@ -112,6 +112,8 @@ Route::get('/getAllPedidos', [PedidoController::class, 'getAllPedidos']);
 Route::get('/getChats/{id}', [MsgsController::class, 'getChats']);
 Route::get('/getAllMessages/{id}', [MsgsController::class, 'getAllMessages']);
 Route::post('/sendMessage', [MsgsController::class, 'sendMessage']);
+
+
 
 //-----------------------------------------------------------------------------------------------//
 

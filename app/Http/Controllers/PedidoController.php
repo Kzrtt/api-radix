@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Cliente;
 
 class PedidoController extends Controller
 {
@@ -51,20 +52,23 @@ class PedidoController extends Controller
         }
     }
 
-    public function getAllPedidos(){
+    public function getAllPedidos($id){
         
-        $pedidos = Pedidos::all();
-
-        if(isset($pedidos))
+        if(Cliente::where('idCliente', $id)->exists())
         {
+            $pedidos = Pedido::all();
+            $filtered = $pedidos->filter(function($value, $key) use ($id) {
+                return $value->idCliente == $id;
+            });
+
             return response()->json([
                 'status'=>'200',
-                'pedidos'=>$pedidos,
+                'pedidos'=>$filtered,
             ]);
         } else {
             return response()->json([
                 'status'=>'400',
-                'message'=>'Falha ao retornar os pedidos',
+                'message'=>'esse cliente não existe',
             ]);
         }
     }
