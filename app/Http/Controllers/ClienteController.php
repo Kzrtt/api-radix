@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Vendedor;
+use App\Models\tblVendedorFav;
 
 class ClienteController extends Controller
 {
@@ -31,7 +33,6 @@ class ClienteController extends Controller
                 'message'=>'Falha ao inserir o cliente',
             ]); 
         }
-
          
     }
 
@@ -146,4 +147,66 @@ class ClienteController extends Controller
         }
     }
 
+    public function addIsFavorite(Request $request)
+    {
+        $isFavorite = New TblVendedorFav();
+
+        $isFavorite->idCliente = $request->idCliente;
+        $isFavorite->idVendedor = $request->idVendedor;
+
+        $result = $isFavorite->save();
+
+        if($result)
+        {
+            return response()->json([
+                'status'=>'200',
+                'message'=>'isFav inserido com sucesso',
+            ]);
+        } else {
+            return response()->json([
+                'status'=>'400',
+                'message'=>'Falha ao inserir o isFav',
+            ]); 
+        }
+        
+    }
+
+    public function getIsFavorite($idCliente, $idVendedor)
+    {
+        if(TblVendedorFav::where(['idCliente', '=', $idCliente], ['idVendedor', '=', $idVendedor])->exists())
+        {
+            $isFavorite = TblVendedorFav::where(['idCliente', '=', $idCliente], ['idVendedor', '=', $idVendedor]);
+            
+            return response()->json([
+                'status'=>'200',
+                'isFavorite'=>$isFavorite,
+            ]);
+        } else {
+            return response()->json([
+                'status'=>'400',
+                'message'=>'não existe ainda',
+            ]);
+        }
+    }
+
+    public function isFavoriteToTrue($idIsFav)
+    {
+        if(TblVendedorFav::where('idVendedorFav', $idIsFav)->exists()){
+
+            $isFavorite = TblVendedorFav::find($idIsFav);
+            $isFavorite->isFavorite = 1;
+            $isFavorite->save();
+        }
+    }
+
+    public function isFavoriteToFalse($idIsFav)
+    {
+        if(TblVendedorFav::where('idVendedorFav', $idIsFav)->exists()){
+
+            $isFavorite = TblVendedorFav::find($idIsFav);
+            $isFavorite->isFavorite = 0;
+            $isFavorite->save();
+        }
+    }
 }
+

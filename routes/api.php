@@ -39,6 +39,10 @@ Route::get('/getAllClientes', [ClienteController::class, 'getAllClientes']);
 Route::get('/getCliente/{id}', [ClienteController::class, 'getCliente']);
 Route::put('/deleteCliente/{id}', [ClienteController::class, 'deleteCliente']);
 Route::get('/loginCliente/{email}/{senha}', [ClienteController::class, 'loginCliente']);
+Route::post('/insertIsFav', [ClienteController::class, 'addIsFavorite']);
+Route::get('/getIsFavorite/{idCliente}/{idVendedor}', [ClienteController::class, 'getIsFavorite']);
+Route::get('/getIsFavorite/{id}', [ClienteController::class, 'isFavoriteToTrue']);
+Route::get('/getIsFavorite/{id}', [ClienteController::class, 'isFavoriteToFalse']);
 
 //Métodos Vendedor
 /**
