@@ -35,7 +35,7 @@ class CupomController extends Controller
             $cuponsCliente = CupomCliente::all();
             $filtered = $cuponsCliente->filter(function ($value, $key) use ($idCliente) {
                 return $value->idCliente == $idCliente;
-            });
+            })->values()->all();
 
             $myTime = now(); 
 

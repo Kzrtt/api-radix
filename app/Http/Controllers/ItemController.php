@@ -56,7 +56,7 @@ class ItemController extends Controller
             $items = Item::all();
             $filtered = $items->filter(function($value, $key) use ($idPedido) {
                 return $value->idPedido == $idPedido;
-            });
+            })->values()->all();
 
             return response()->json([
                 'status'=>'200',

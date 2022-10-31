@@ -59,7 +59,7 @@ class PedidoController extends Controller
             $pedidos = Pedido::all();
             $filtered = $pedidos->filter(function($value, $key) use ($id) {
                 return $value->idCliente == $id;
-            });
+            })->values()->all();
 
             return response()->json([
                 'status'=>'200',
