@@ -25,6 +25,7 @@ class PedidoController extends Controller
             return response()->json([
                 'status'=>'200',
                 'message'=>'Pedido inserido com sucesso',
+                'message'=> $pedido,
             ]);
         } else {
             return response()->json([
