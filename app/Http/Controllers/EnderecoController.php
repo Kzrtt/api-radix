@@ -33,9 +33,7 @@ class EnderecoController extends Controller
                 'status'=>'400',
                 'message'=>'Falha ao inserir o endereco',
             ]); 
-        }
-
-         
+        }       
     }
 
     public function updateEndereco(Request $request, $idEndereco)
